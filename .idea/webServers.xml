@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="c537a473-7813-44e5-9b4e-f4e3f219d655" name="rpi3-display01" url="http://rpi3-display01">
+        <fileTransfer host="rpi3-display01" port="22" rootFolder="/home/pi" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="6654cfca-64b3-45e5-8857-afb00926e5da" name="SA RPI3 Display 01" url="http://10.85.1.134">
+        <fileTransfer host="10.85.1.134" port="22" rootFolder="/home/pi" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="2c5b2bda-09ac-480b-b2ef-d430e8f814f8" name="pizero-01" url="http://pizero-01.local">
+        <fileTransfer host="pizero-01.local" port="22" rootFolder="/home/pi" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

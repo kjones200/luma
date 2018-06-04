@@ -82,12 +82,12 @@ def network(iface):
 
 def stats(device):
     # use custom font
-    # font_path = os.path.abspath(os.path.join(os.path.dirname(__file__),'fonts', 'C&C Red Alert [INET].ttf'))
+    font_path = os.path.abspath(os.path.join(os.path.dirname(__file__),'fonts', 'C&C Red Alert [INET].ttf'))
     # font_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'tiny.ttf'))
     # font_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'digit.ttf'))
-    font_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'freefont','FreeSans.ttf'))
-    # font2 = ImageFont.truetype(font_path, 12)
-    font2 = ImageFont.truetype(font_path, 12, encoding="unic")
+    # font_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'freefont','FreeMono.ttf'))
+    # font_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'Picopixel.ttf'))
+    font2 = ImageFont.truetype(font_path, 12)
 
 
     with canvas(device) as draw:
@@ -104,10 +104,12 @@ def stats(device):
                 pass
 
 
+
 def main():
+
     while True:
         stats(device)
-        time.sleep(5)
+        time.sleep(1)
 
 
 if __name__ == "__main__":
