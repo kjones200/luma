@@ -84,18 +84,18 @@ def stats(device):
     size = None
     # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts',
     #                                                'C&C Red Alert [INET].ttf')), 16
-    # font_path, size  = os.path.abspath(os.path.join(os.path.dirname(__file__),'fonts', 'tiny.ttf')), 16
+    # font_path, size  = os.path.abspath(os.path.join(os.path.dirname(__file__),'fonts', 'tiny.ttf')), 12
     # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'ProggyTiny.ttf')), 16
     # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'creep.bdf')), 16
-    # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'miscfs_.ttf')), 16
+    font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'miscfs_.ttf')), 12
     # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'FreePixel.ttf')), 16
     # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', '8bit_wonder.ttf')), 14
-    # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'Minecraft.ttf')), 16
-    font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'pixelmix.ttf')), 16
+    font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'Minecraft.ttf')), 8
+    # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'pixelmix.ttf')), 12
     # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', '5x7.ttf')), 16
     # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'code2000.ttf')), 16
     # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', '5x7.bdf')), 7
-    # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'Minecraftia-Regular.ttf')), 16
+    font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'Minecraftia-Regular.ttf')), 8
     # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'digit.ttf')), 16
 
     # font_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'Minecraftia-Regular'))
@@ -136,7 +136,7 @@ def stats(device):
 def main():
     while True:
         stats(device)
-        time.sleep(1)
+        time.sleep(.5)
 
 if __name__ == "__main__":
     try:
