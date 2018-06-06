@@ -39,7 +39,7 @@ import luma.core.error
 import luma.core.framebuffer
 import luma.oled.const
 
-__all__ = ["ssd1306", "ssd1322", "ssd1325", "ssd1327", "ssd1331", "ssd1351", "sh1106"]
+__all__ = ["ssd1306", "ssd1322", "ssd1325", "ssd1327", "ssd1331", "ssd1351", "sh1106","ssd1322_NHD25664"]
 
 class sh1106(device):
     """
@@ -470,7 +470,7 @@ class ssd1322(device):
         self.framebuffer = getattr(luma.core.framebuffer, framebuffer)(self)
         self.populate = self._render_mono if mode == "1" else self._render_greyscale
         self.column_offset = (480 - width) // 2
-        #self.column_offset = 112
+        # self.column_offset = 112
 
         if width <= 0 or width > 256 or \
                         height <= 0 or height > 64 or \
@@ -478,7 +478,7 @@ class ssd1322(device):
             raise luma.core.error.DeviceDisplayModeError(
                 "Unsupported display mode: {0} x {1}".format(width, height))
 
-        self.reset_display()
+        self.reset()
         self.command(0xFD, 0x12)  # Unlock IC
         self.command(0xAE)  # Display off
         self.command(0xB3, 0x91)  # Display divide clockratio/freq
@@ -520,7 +520,6 @@ class ssd1322(device):
 
             i += 1
 
-
     def _render_greyscale(self, buf, pixel_data):
         i = 0
         for r, g, b in pixel_data:
@@ -561,7 +560,7 @@ class ssd1322(device):
             coladdr_end = (pix_start + width >> 2) - 1
 
             self.command(0x15, coladdr_start, coladdr_end)  # set column addr
-            self.command(0x75, top, bottom - 1)             # Reset row addr
+            self.command(0x75, top, bottom - 1)  # Reset row addr
             # self.command(0x15, 28, 91)  # set column addr
             # self.command(0x75, 0, 63)  # Reset row addr
             self.command(0x5C)  # Enable MCU to write data into RAM
@@ -570,7 +569,6 @@ class ssd1322(device):
 
             self.populate(buf, self.framebuffer.getdata())
             self.data(list(buf))
-
 
     def command(self, cmd, *args):
         """
@@ -581,6 +579,111 @@ class ssd1322(device):
         self._serial_interface.command(cmd)
         if len(args) > 0:
             self._serial_interface.data(list(args))
+
+class ssd1322_NHD25664(ssd1322):
+    def __init__(self, serial_interface=None, width=256, height=64, rotate=0, mode="RGB",
+                 framebuffer="diff_to_previous", **kwargs):
+        super(ssd1322_NHD25664, self).__init__(serial_interface, width, height, rotate, mode, framebuffer, **kwargs)
+        self.capabilities(width, height, rotate, mode)
+        self.framebuffer = getattr(luma.core.framebuffer, framebuffer)(self)
+        self.populate = self._render_mono if mode == "1" else self._render_greyscale
+        self.column_offset = (480 - width) // 2
+
+        if width <= 0 or width > 256 or \
+                        height <= 0 or height > 64 or \
+                                width % 16 != 0 or height % 16 != 0:
+            raise luma.core.error.DeviceDisplayModeError(
+                "Unsupported display mode: {0} x {1}".format(width, height))
+
+        self.reset()
+        self.set_command_lock(0x12)
+        self.hide()
+        self.set_column_address(0x1c, 0x5b)
+        self.set_row_address(0x00, 0x3f)
+        self.set_display_clock(0x91)
+        self.set_multiplex_ratio(0x3f)
+        self.set_display_offset(0x00)
+        self.set_start_line(0x00)
+        self.set_remap_format(0x14)
+        self.set_gpio(0x00)
+        self.set_function_selection(0x01)
+        self.set_display_enhancement_a(0xa0, 0xfd)
+        self.set_master_current(0x0f)
+        self.set_linear_gray_scale_table()
+        self.set_phase_length(0xe2)
+        self.set_display_enhancement_b(0x20)
+        self.set_precharge_voltage(0x1f)
+        self.set_precharge_period(0x08)
+        self.set_vcomh(0x07)
+        self.set_display_mode(0x02)
+        #self.set_partial_display(0x01, 0x00, 0x00)
+        self.exit_partial_display()
+
+        self.contrast(0x7F)  # Reset
+        self.clear()
+        self.show()
+
+    def set_command_lock(self, val):
+        self.command(0xFD, val)
+
+    def set_column_address(self, start, end):
+        self.command(0x15, start, end)  # set column addr
+
+    def set_row_address(self, top, bottom):
+        self.command(0x75, top, bottom)  # Reset row addr
+
+    def set_display_clock(self, val):
+        self.command(0xB3, val)
+
+    def set_multiplex_ratio(self,val):
+        self.command(0xCA,val)
+
+    def set_display_offset(self,val):
+        self.command(0xA2, val)
+
+    def set_start_line(self,val):
+        self.command(0xA1, val)
+
+    def set_remap_format(self, val1, val2=0x11):
+        self.command(0xA0, val1, val2)
+
+    def set_gpio(self,val):
+        self.command(0xB5, val)
+
+    def set_function_selection(self,val):
+        self.command(0xAB, val)
+
+    def set_display_enhancement_a(self,*val):
+        pass
+
+    def set_master_current(self,val):
+        self.command(0xC7, val)
+
+    def set_linear_gray_scale_table(self):
+        pass
+
+    def set_phase_length(self,val):
+        self.command(0xB1, val)
+
+    def set_display_enhancement_b(self,val):
+        pass
+
+    def set_precharge_voltage(self,val):
+        self.command(0xBB, val)
+
+    def set_precharge_period(self,val):
+        self.command(0xB6, val)
+
+    def set_vcomh(self,val):
+        self.command(0xBE, val)
+
+    def set_display_mode(self,mode):
+        self.command(mode)
+
+    def exit_partial_display(self):
+        self.command(0xA9)
+
+
 
 class ssd1325(device):
     """
