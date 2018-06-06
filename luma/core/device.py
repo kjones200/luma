@@ -31,7 +31,7 @@ class device(mixin.capabilities):
 
         atexit.register(shutdown_hook)
 
-    def reset_display(self):
+    def reset(self):
         from luma.core.util import usleep
 
         self._serial_interface.assert_reset() # pull low
