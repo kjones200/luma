@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b8621e4-92b8-4580-b79a-f5058b759149" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/sa.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/pi_logo.py" afterPath="$PROJECT_DIR$/examples/pi_logo.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/stats.py" afterPath="$PROJECT_DIR$/examples/stats.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/sys_info.py" afterPath="$PROJECT_DIR$/examples/sys_info.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/luma/core/device.py" afterPath="$PROJECT_DIR$/luma/core/device.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/luma/oled/device.py" afterPath="$PROJECT_DIR$/luma/oled/device.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,8 +16,9 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/luma$clock.coverage" NAME="clock Coverage Results" MODIFIED="1527991735867" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/luma$Doctests_in_sa.coverage" NAME="Doctests in sa Coverage Results" MODIFIED="1528380718330" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/luma$colors.coverage" NAME="colors Coverage Results" MODIFIED="1527268512171" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
-    <SUITE FILE_PATH="coverage/luma$stats.coverage" NAME="stats Coverage Results" MODIFIED="1528327378697" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/luma$stats.coverage" NAME="stats Coverage Results" MODIFIED="1528380540794" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/luma$font_awesome.coverage" NAME="font_awesome Coverage Results" MODIFIED="1527268374623" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/luma$greyscale.coverage" NAME="greyscale Coverage Results" MODIFIED="1527983473033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/luma$sevensegment_demo.coverage" NAME="sevensegment_demo Coverage Results" MODIFIED="1527991962156" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
@@ -27,18 +28,31 @@
     <SUITE FILE_PATH="coverage/luma$terminal.coverage" NAME="terminal Coverage Results" MODIFIED="1528326679012" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/luma$test_text.coverage" NAME="test_text Coverage Results" MODIFIED="1527436412278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/luma$weather.coverage" NAME="weather Coverage Results" MODIFIED="1527990877381" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
-    <SUITE FILE_PATH="coverage/luma$pi_logo.coverage" NAME="pi_logo Coverage Results" MODIFIED="1528043711746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/luma$pi_logo.coverage" NAME="pi_logo Coverage Results" MODIFIED="1528380044024" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/luma$digital_clock.coverage" NAME="digital_clock Coverage Results" MODIFIED="1527992183396" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
-    <SUITE FILE_PATH="coverage/luma$perfloop.coverage" NAME="perfloop Coverage Results" MODIFIED="1527990458683" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/luma$perfloop.coverage" NAME="perfloop Coverage Results" MODIFIED="1528380091457" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/luma$sa.coverage" NAME="sa Coverage Results" MODIFIED="1528390802394" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/luma$welcome.coverage" NAME="welcome Coverage Results" MODIFIED="1527727586420" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="stats.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="stats.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/stats.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="97" column="117" lean-forward="false" selection-start-line="97" selection-start-column="117" selection-end-line="97" selection-end-column="117" />
+            <state relative-caret-position="94">
+              <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="50" selection-end-column="26" />
+              <folding>
+                <element signature="e#744#753#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sa.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/examples/sa.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="454">
+              <caret line="91" column="0" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
               <folding>
                 <element signature="e#744#753#0" expanded="true" />
               </folding>
@@ -49,8 +63,28 @@
       <file leaf-file-name="sys_info.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/sys_info.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="89" column="117" lean-forward="false" selection-start-line="89" selection-start-column="117" selection-end-line="89" selection-end-column="117" />
+            <state relative-caret-position="-135">
+              <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="57" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImageDraw.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Library/Caches/PyCharm2017.2/remote_sources/-1509517591/-1227933812/PIL/ImageDraw.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="262" column="0" lean-forward="false" selection-start-line="262" selection-start-column="0" selection-end-line="262" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImageFont.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Library/Caches/PyCharm2017.2/remote_sources/-1509517591/-1227933812/PIL/ImageFont.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="157" column="0" lean-forward="false" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -96,41 +130,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="demo.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/demo.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-608">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="pi_logo.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/pi_logo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="25" column="33" lean-forward="false" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="device.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/luma/core/device.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="55" column="4" lean-forward="false" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="const.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/luma/core/const.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+            <state relative-caret-position="240">
+              <caret line="18" column="45" lean-forward="false" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -174,11 +178,12 @@
         <option value="$PROJECT_DIR$/examples/perfloop.py" />
         <option value="$PROJECT_DIR$/examples/weather.py" />
         <option value="$PROJECT_DIR$/examples/digital_clock.py" />
-        <option value="$PROJECT_DIR$/examples/pi_logo.py" />
         <option value="$PROJECT_DIR$/examples/sys_info.py" />
         <option value="$PROJECT_DIR$/luma/core/device.py" />
         <option value="$PROJECT_DIR$/luma/oled/device.py" />
+        <option value="$PROJECT_DIR$/examples/pi_logo.py" />
         <option value="$PROJECT_DIR$/examples/stats.py" />
+        <option value="$PROJECT_DIR$/examples/sa.py" />
       </list>
     </option>
   </component>
@@ -220,12 +225,6 @@
               <item name="luma" type="b2602c69:ProjectViewProjectNode" />
               <item name="luma" type="462c0819:PsiDirectoryNode" />
               <item name="examples" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="luma" type="b2602c69:ProjectViewProjectNode" />
-              <item name="luma" type="462c0819:PsiDirectoryNode" />
-              <item name="examples" type="462c0819:PsiDirectoryNode" />
-              <item name="fonts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="luma" type="b2602c69:ProjectViewProjectNode" />
@@ -277,8 +276,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.stats">
-    <configuration name="demo" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.sa">
+    <configuration name="perfloop" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -291,7 +290,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="luma" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/demo.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/perfloop.py" />
       <option name="PARAMETERS" value="--display=ssd1322 --interface=spi --width=256 --spi-bus-speed=16000000" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -310,11 +309,11 @@
       <module name="luma" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/pi_logo.py" />
-      <option name="PARAMETERS" value="--display=ssd1322 --width=256 --interface=spi --spi-bus-speed=16000000" />
+      <option name="PARAMETERS" value="--display=ssd1322 --interface=spi --width=256 --spi-bus-speed=16000000" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="scrolling_pixelart" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="sa" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -327,8 +326,8 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="luma" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/scrolling_pixelart.py" />
-      <option name="PARAMETERS" value="--display=ssd1322 --width=256 --interface=spi --spi-bus-speed=16000000" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/sa.py" />
+      <option name="PARAMETERS" value="--display=ssd1322_NHD25664 --interface=spi --width=256 --spi-bus-speed=16000000" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
@@ -407,19 +406,18 @@
     <list size="7">
       <item index="0" class="java.lang.String" itemvalue="Python.sys_info" />
       <item index="1" class="java.lang.String" itemvalue="Python.test_text" />
-      <item index="2" class="java.lang.String" itemvalue="Python.pi_logo" />
-      <item index="3" class="java.lang.String" itemvalue="Python.scrolling_pixelart" />
+      <item index="2" class="java.lang.String" itemvalue="Python.sa" />
+      <item index="3" class="java.lang.String" itemvalue="Python.pi_logo" />
       <item index="4" class="java.lang.String" itemvalue="Python.stats" />
-      <item index="5" class="java.lang.String" itemvalue="Python.demo" />
-      <item index="6" class="java.lang.String" itemvalue="Python.terminal" />
+      <item index="5" class="java.lang.String" itemvalue="Python.terminal" />
+      <item index="6" class="java.lang.String" itemvalue="Python.perfloop" />
     </list>
     <recent_temporary>
-      <list size="5">
+      <list size="4">
         <item index="0" class="java.lang.String" itemvalue="Python.stats" />
-        <item index="1" class="java.lang.String" itemvalue="Python.terminal" />
-        <item index="2" class="java.lang.String" itemvalue="Python.demo" />
-        <item index="3" class="java.lang.String" itemvalue="Python.pi_logo" />
-        <item index="4" class="java.lang.String" itemvalue="Python.scrolling_pixelart" />
+        <item index="1" class="java.lang.String" itemvalue="Python.perfloop" />
+        <item index="2" class="java.lang.String" itemvalue="Python.pi_logo" />
+        <item index="3" class="java.lang.String" itemvalue="Python.terminal" />
       </list>
     </recent_temporary>
   </component>
@@ -436,6 +434,11 @@
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="Doctests_in_sa - 2018.06.07 at 09h 12m 00s.xml">
+      <configuration name="Doctests in sa" configurationId="tests" />
+    </history-entry>
+  </component>
   <component name="ToolWindowManager">
     <frame x="181" y="24" width="1739" height="1148" extended-state="0" />
     <layout>
@@ -447,12 +450,13 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291262" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28579846" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28579846" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291262" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291262" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35339805" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35339805" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -500,7 +504,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="100" />
+      <option name="time" value="107" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -509,17 +513,11 @@
         <watch expression="*val" language="Python" />
         <watch expression="val[0]" language="Python" />
         <watch expression="val[1]" language="Python" />
+        <watch expression="IP.strip()" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../hmi-daemon/hmi/constants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Library/Caches/PyCharm2017.2/remote_sources/1528064871/-1227933812/PIL/ImageFont.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
@@ -645,14 +643,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2017.2/remote_sources/-1509517591/-1227933812/PIL/ImageDraw.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1065">
-          <caret line="74" column="36" lean-forward="false" selection-start-line="74" selection-start-column="20" selection-end-line="74" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/esp8266_ssd1322.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -689,14 +679,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2017.2/remote_sources/-1509517591/-1227933812/PIL/ImageFont.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="942">
-          <caret line="327" column="4" lean-forward="false" selection-start-line="327" selection-start-column="4" selection-end-line="327" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -847,14 +829,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/pi_logo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="25" column="33" lean-forward="false" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/demo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-608">
@@ -913,16 +887,50 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/sys_info.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="89" column="117" lean-forward="false" selection-start-line="89" selection-start-column="117" selection-end-line="89" selection-end-column="117" />
+        <state relative-caret-position="-135">
+          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="57" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/pi_logo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="18" column="45" lean-forward="false" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2017.2/remote_sources/-1509517591/-1227933812/PIL/ImageFont.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="157" column="0" lean-forward="false" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2017.2/remote_sources/-1509517591/-1227933812/PIL/ImageDraw.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="262" column="0" lean-forward="false" selection-start-line="262" selection-start-column="0" selection-end-line="262" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/stats.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="97" column="117" lean-forward="false" selection-start-line="97" selection-start-column="117" selection-end-line="97" selection-end-column="117" />
+        <state relative-caret-position="94">
+          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="50" selection-end-column="26" />
+          <folding>
+            <element signature="e#744#753#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/sa.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="91" column="0" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
           <folding>
             <element signature="e#744#753#0" expanded="true" />
           </folding>

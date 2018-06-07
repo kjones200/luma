@@ -48,28 +48,54 @@ except ImportError:
 def ip_address():
     cmd = "hostname -I | cut -d\' \' -f1"
     IP = subprocess.check_output(cmd, shell=True)
-    return str(IP)
+    return str(IP.strip())
 
 def cpu_load():
     cmd = "top -bn1 | grep load | awk '{printf \"CPU Load: %.2f\", $(NF-2)}'"
     CPU = subprocess.check_output(cmd, shell=True)
-    return str(CPU)
+    return str(CPU.strip())
 
 def mem_usage():
     cmd = "free -m | awk 'NR==2{printf \"Mem: %s/%sMB %.2f%%\", $3,$2,$3*100/$2 }'"
     MemUsage = subprocess.check_output(cmd, shell=True)
-    return str(MemUsage)
+    return str(MemUsage.strip())
 
 def disk_usage():
-    cmd = "df -h | awk '$NF==\"/\"{printf \"Disk: %d/%dGB %s\", $3,$2,$5}'"
+    cmd = "df -h | awk '$NF==\"/\"{printf \"Disk: %.1f/%.1fGB %s\", $3,$2,$5}'"
     Disk = subprocess.check_output(cmd, shell=True)
-    return str(Disk)
+    return str(Disk.strip())
 
 def current_time():
     import datetime
 
     return datetime.datetime.now().strftime('%I:%M:%S')
 
+def current_date():
+    import datetime
+
+    return datetime.datetime.now().strftime('%Y-%m-%d')
+
+def network(iface):
+    stat = psutil.net_io_counters(pernic=True)[iface]
+    return "%s: Tx%s, Rx%s" % \
+           (iface, bytes2human(stat.bytes_sent), bytes2human(stat.bytes_recv))
+
+def bytes2human(n):
+    """
+    >>> bytes2human(10000)
+    '9K'
+    >>> bytes2human(100001221)
+    '95M'
+    """
+    symbols = ('K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y')
+    prefix = {}
+    for i, s in enumerate(symbols):
+        prefix[s] = 1 << (i + 1) * 10
+    for s in reversed(symbols):
+        if n >= prefix[s]:
+            value = int(float(n) / prefix[s])
+            return '%s%s' % (value, s)
+    return "%sB" % n
 
 def stats(device):
     # use custom font
@@ -77,25 +103,26 @@ def stats(device):
     padding = 0
     top = padding
     bottom = device.height - padding
-    height_padding = 15
+    height_padding = 14
 
 
     font_path = None
     size = None
-    # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts',
-    #                                                'C&C Red Alert [INET].ttf')), 16
+    font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts',
+                                                   'C&C Red Alert [INET].ttf')), 16
+
     # font_path, size  = os.path.abspath(os.path.join(os.path.dirname(__file__),'fonts', 'tiny.ttf')), 12
     # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'ProggyTiny.ttf')), 16
     # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'creep.bdf')), 16
-    font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'miscfs_.ttf')), 12
+    # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'miscfs_.ttf')), 12
     # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'FreePixel.ttf')), 16
     # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', '8bit_wonder.ttf')), 14
-    font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'Minecraft.ttf')), 8
+    # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'Minecraft.ttf')), 8
     # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'pixelmix.ttf')), 12
     # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', '5x7.ttf')), 16
     # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'code2000.ttf')), 16
     # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', '5x7.bdf')), 7
-    font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'Minecraftia-Regular.ttf')), 8
+    # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'Minecraftia-Regular.ttf')), 8
     # font_path, size = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'digit.ttf')), 16
 
     # font_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'Minecraftia-Regular'))
@@ -123,14 +150,17 @@ def stats(device):
         #         pass
 
         top = 0
-        draw.text((0, top), "IP: " + ip_address(), font=font2, fill="white")
+        draw.text((0, 0), "IP: " + ip_address(), font=font2, fill="white")
+        draw.text((128, 0), 'Date: ' + current_date(), font=font2, fill="white")
         top += height_padding
-        draw.text((0, top), cpu_load(), font=font2, fill="white")
+        draw.text((0, 14), cpu_load(), font=font2, fill="white")
+        draw.text((128, 14), 'Time: ' + current_time(), font=font2, fill="white")
         top += height_padding
-        draw.text((0, top), mem_usage(), font=font2, fill="white")
+        draw.text((0, 26), mem_usage(), font=font2, fill="white")
         top += height_padding
-        # draw.text((0, top), disk_usage(), font=font2, fill="white")
-        draw.text((0, top), current_time(), font=font2, fill="white")
+        draw.text((0, 38), disk_usage(), font=font2, fill="white")
+        #draw.text((0, top), current_time(), font=font2, fill="white")
+        draw.text((0, 50), network('wlan0'), font=font2, fill="white")
 
 
 def main():
