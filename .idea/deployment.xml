@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="pizero-01" traceLevel="DETAILS" filePermissions="511" folderPermissions="511">
+  <component name="PublishConfigData" autoUpload="Always" serverName="raspberrypi-01" traceLevel="DETAILS" filePermissions="511" folderPermissions="511">
     <serverData>
       <paths name="SA RPI3 Display 01">
         <serverdata>
@@ -10,6 +10,13 @@
         </serverdata>
       </paths>
       <paths name="pizero-01">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/luma" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="raspberrypi-01">
         <serverdata>
           <mappings>
             <mapping deploy="/luma" local="$PROJECT_DIR$" web="/" />
