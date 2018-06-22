@@ -39,7 +39,7 @@ import luma.core.error
 import luma.core.framebuffer
 import luma.oled.const
 
-__all__ = ["ssd1306", "ssd1322", "ssd1325", "ssd1327", "ssd1331", "ssd1351", "sh1106","ssd1322_NHD25664"]
+__all__ = ["ssd1306", "ssd1322", "ssd1325", "ssd1327", "ssd1331", "ssd1351", "sh1106","ssd1322_NHD12864"]
 
 class sh1106(device):
     """
@@ -436,154 +436,9 @@ class ssd1351(device):
             self._serial_interface.data(list(args))
 
 class ssd1322(device):
-    """
-    Serial interface to a 4-bit greyscale SSD1322 OLED display.
-
-    On creation, an initialization sequence is pumped to the
-    display to properly configure it. Further control commands can then be
-    called to affect the brightness and other settings.
-
-    :param serial_interface: the serial interface (usually a
-       :py:class`luma.core.interface.serial.spi` instance) to delegate sending
-       data and commands through.
-    :param width: the number of horizontal pixels (optional, defaults to 96).
-    :type width: int
-    :param height: the number of vertical pixels (optional, defaults to 64).
-    :type height: int
-    :param rotate: an integer value of 0 (default), 1, 2 or 3 only, where 0 is
-        no rotation, 1 is rotate 90° clockwise, 2 is 180° rotation and 3
-        represents 270° rotation.
-    :type rotate: int
-    :param mode: Supplying "1" or "RGB" effects a different rendering
-         mechanism, either to monochrome or 4-bit greyscale.
-    :type mode: str
-    :param framebuffer: Framebuffering strategy, currently values of
-        ``diff_to_previous`` or ``full_frame`` are only supported
-    :type framebuffer: str
-
-    """
-
-    def __init__(self, serial_interface=None, width=256, height=64, rotate=0,
-                 mode="RGB", framebuffer="diff_to_previous", **kwargs):
-        super(ssd1322, self).__init__(luma.oled.const.ssd1322, serial_interface)
-        self.capabilities(width, height, rotate, mode)
-        self.framebuffer = getattr(luma.core.framebuffer, framebuffer)(self)
-        self.populate = self._render_mono if mode == "1" else self._render_greyscale
-        self.column_offset = (480 - width) // 2
-        # self.column_offset = 112
-
-        if width <= 0 or width > 256 or \
-                        height <= 0 or height > 64 or \
-                                width % 16 != 0 or height % 16 != 0:
-            raise luma.core.error.DeviceDisplayModeError(
-                "Unsupported display mode: {0} x {1}".format(width, height))
-
-        self.reset()
-        self.command(0xFD, 0x12)  # Unlock IC
-        self.command(0xAE)  # Display off
-        self.command(0xB3, 0x91)  # Display divide clockratio/freq
-        self.command(0xCA, 0x3F)  # Set MUX ratio
-        self.command(0xA2, 0x00)  # Display offset
-        self.command(0xAB, 0x01)  # Display offset
-        self.command(0xA0, 0x16, 0x11)  # Set remap & dual COM Line
-        self.command(0xC7, 0x0F)  # Master contrast (reset)
-        self.command(0xC1, 0x9F)  # Set contrast current
-        self.command(0xB1, 0xF2)  # Set default greyscale table
-        self.command(0xBB, 0x1F)  # Pre-charge voltage
-        self.command(0xB4, 0xA0, 0xFD)  # Display enhancement A (External VSL)
-        self.command(0xBE, 0x04)  # Set VcomH
-        self.command(0xA6)  # Normal display (reset)
-        self.command(0xAF)  # Exit partial display
-
-        self.contrast(0x7F)  # Reset
-        self.clear()
-        self.show()
-
-    def _render_mono(self, buf, pixel_data):
-        i = 0
-        # for pix in pixel_data:
-        #     if pix > 0:
-        #         if i % 2 == 0:
-        #             buf[i // 2] = 0xF0
-        #         else:
-        #             buf[i // 2] |= 0x0F
-        #
-        #     i += 1
-
-        for pix in pixel_data:
-
-            if pix > 0:
-                if i % 2 == 0:
-                    buf[i // 2] = 0xFF
-                else:
-                    buf[i // 2] |= 0xFF
-
-            i += 1
-
-    def _render_greyscale(self, buf, pixel_data):
-        i = 0
-        for r, g, b in pixel_data:
-
-            # RGB->Greyscale luma calculation into 4-bits
-            grey = (r * 306 + g * 601 + b * 117) >> 14
-
-            if grey > 0:
-                if i % 2 == 0:
-                    buf[i // 2] = (grey << 4)
-                else:
-                    buf[i // 2] |= grey
-
-            i += 1
-
-    def display(self, image):
-        """
-        Takes a 1-bit monochrome or 24-bit RGB image and renders it
-        to the SSD1322 OLED display. RGB pixels are converted to 4-bit
-        greyscale values using a simplified Luma calculation, based on
-        *Y'=0.299R'+0.587G'+0.114B'*.
-
-        :param image: the image to render
-        :type image: PIL.Image.Image
-        """
-        assert (image.mode == self.mode)
-        assert (image.size == self.size)
-
-        image = self.preprocess(image)
-
-        if self.framebuffer.redraw_required(image):
-            left, top, right, bottom = self.framebuffer.inflate_bbox()
-            width = right - left
-            height = bottom - top
-
-            pix_start = self.column_offset + left
-            coladdr_start = pix_start >> 2
-            coladdr_end = (pix_start + width >> 2) - 1
-
-            self.command(0x15, coladdr_start, coladdr_end)  # set column addr
-            self.command(0x75, top, bottom - 1)  # Reset row addr
-            # self.command(0x15, 28, 91)  # set column addr
-            # self.command(0x75, 0, 63)  # Reset row addr
-            self.command(0x5C)  # Enable MCU to write data into RAM
-
-            buf = bytearray(width * height >> 1)
-
-            self.populate(buf, self.framebuffer.getdata())
-            self.data(list(buf))
-
-    def command(self, cmd, *args):
-        """
-        Sends a command and an (optional) sequence of arguments through to the
-        delegated serial interface. Note that the arguments are passed through
-        as data.
-        """
-        self._serial_interface.command(cmd)
-        if len(args) > 0:
-            self._serial_interface.data(list(args))
-
-class ssd1322_NHD25664(ssd1322):
     def __init__(self, serial_interface=None, width=256, height=64, rotate=0, mode="RGB",
                  framebuffer="diff_to_previous", **kwargs):
-        super(ssd1322_NHD25664, self).__init__(serial_interface, width, height, rotate, mode, framebuffer, **kwargs)
+        super(ssd1322, self).__init__(luma.oled.const.ssd1322, serial_interface)
         self.capabilities(width, height, rotate, mode)
         self.framebuffer = getattr(luma.core.framebuffer, framebuffer)(self)
         self.populate = self._render_mono if mode == "1" else self._render_greyscale
@@ -682,6 +537,216 @@ class ssd1322_NHD25664(ssd1322):
 
     def exit_partial_display(self):
         self.command(0xA9)
+
+    def _render_mono(self, buf, pixel_data):
+        i = 0
+
+        for pix in pixel_data:
+
+            if pix > 0:
+                if i % 2 == 0:
+                    buf[i // 2] = 0xFF
+                else:
+                    buf[i // 2] |= 0xFF
+
+            i += 1
+
+    def _render_greyscale(self, buf, pixel_data):
+        i = 0
+        for r, g, b in pixel_data:
+
+            # RGB->Greyscale luma calculation into 4-bits
+            grey = (r * 306 + g * 601 + b * 117) >> 14
+
+            if grey > 0:
+                if i % 2 == 0:
+                    buf[i // 2] = (grey << 4)
+                else:
+                    buf[i // 2] |= grey
+
+            i += 1
+
+    def display(self, image):
+        """
+        Takes a 1-bit monochrome or 24-bit RGB image and renders it
+        to the SSD1322 OLED display. RGB pixels are converted to 4-bit
+        greyscale values using a simplified Luma calculation, based on
+        *Y'=0.299R'+0.587G'+0.114B'*.
+
+        :param image: the image to render
+        :type image: PIL.Image.Image
+        """
+        assert (image.mode == self.mode)
+        assert (image.size == self.size)
+
+        image = self.preprocess(image)
+
+        if self.framebuffer.redraw_required(image):
+            left, top, right, bottom = self.framebuffer.inflate_bbox()
+            width = right - left
+            height = bottom - top
+
+            pix_start = self.column_offset + left
+            coladdr_start = pix_start >> 2
+            coladdr_end = (pix_start + width >> 2) - 1
+
+            self.command(0x15, coladdr_start, coladdr_end)  # set column addr
+            self.command(0x75, top, bottom - 1)  # Reset row addr
+            # self.command(0x15, 28, 91)  # set column addr
+            # self.command(0x75, 0, 63)  # Reset row addr
+            self.command(0x5C)  # Enable MCU to write data into RAM
+
+            buf = bytearray(width * height >> 1)
+
+            self.populate(buf, self.framebuffer.getdata())
+            self.data(list(buf))
+
+    def command(self, cmd, *args):
+        """
+        Sends a command and an (optional) sequence of arguments through to the
+        delegated serial interface. Note that the arguments are passed through
+        as data.
+        """
+        self._serial_interface.command(cmd)
+        if len(args) > 0:
+            self._serial_interface.data(list(args))
+
+class ssd1322_NHD12864(ssd1322):
+    """
+    Serial interface to a 4-bit greyscale SSD1322 OLED display.
+
+    On creation, an initialization sequence is pumped to the
+    display to properly configure it. Further control commands can then be
+    called to affect the brightness and other settings.
+
+    :param serial_interface: the serial interface (usually a
+       :py:class`luma.core.interface.serial.spi` instance) to delegate sending
+       data and commands through.
+    :param width: the number of horizontal pixels (optional, defaults to 96).
+    :type width: int
+    :param height: the number of vertical pixels (optional, defaults to 64).
+    :type height: int
+    :param rotate: an integer value of 0 (default), 1, 2 or 3 only, where 0 is
+        no rotation, 1 is rotate 90° clockwise, 2 is 180° rotation and 3
+        represents 270° rotation.
+    :type rotate: int
+    :param mode: Supplying "1" or "RGB" effects a different rendering
+         mechanism, either to monochrome or 4-bit greyscale.
+    :type mode: str
+    :param framebuffer: Framebuffering strategy, currently values of
+        ``diff_to_previous`` or ``full_frame`` are only supported
+    :type framebuffer: str
+
+    """
+
+    def __init__(self, serial_interface=None, width=256, height=64, rotate=0,
+                 mode="RGB", framebuffer="diff_to_previous", **kwargs):
+        super(ssd1322, self).__init__(luma.oled.const.ssd1322, serial_interface)
+        self.capabilities(width, height, rotate, mode)
+        self.framebuffer = getattr(luma.core.framebuffer, framebuffer)(self)
+        self.populate = self._render_mono if mode == "1" else self._render_greyscale
+        self.column_offset = (480 - width) // 2
+
+        if width <= 0 or width > 256 or \
+                        height <= 0 or height > 64 or \
+                                width % 16 != 0 or height % 16 != 0:
+            raise luma.core.error.DeviceDisplayModeError(
+                "Unsupported display mode: {0} x {1}".format(width, height))
+
+        self.reset()
+        self.command(0xFD, 0x12)  # Unlock IC
+        self.command(0xAE)  # Display off
+        self.command(0xB3, 0x91)  # Display divide clockratio/freq
+        self.command(0xCA, 0x3F)  # Set MUX ratio
+        self.command(0xA2, 0x00)  # Display offset
+        self.command(0xAB, 0x01)  # Display offset
+        self.command(0xA0, 0x16, 0x11)  # Set remap & dual COM Line
+        self.command(0xC7, 0x0F)  # Master contrast (reset)
+        self.command(0xC1, 0x9F)  # Set contrast current
+        self.command(0xB1, 0xF2)  # Set default greyscale table
+        self.command(0xBB, 0x1F)  # Pre-charge voltage
+        self.command(0xB4, 0xA0, 0xFD)  # Display enhancement A (External VSL)
+        self.command(0xBE, 0x04)  # Set VcomH
+        self.command(0xA6)  # Normal display (reset)
+        self.command(0xAF)  # Exit partial display
+
+        self.contrast(0x7F)  # Reset
+        self.clear()
+        self.show()
+
+    # def _render_mono(self, buf, pixel_data):
+    #     i = 0
+    #
+    #     for pix in pixel_data:
+    #
+    #         if pix > 0:
+    #             if i % 2 == 0:
+    #                 buf[i // 2] = 0xFF
+    #             else:
+    #                 buf[i // 2] |= 0xFF
+    #
+    #         i += 1
+    #
+    # def _render_greyscale(self, buf, pixel_data):
+    #     i = 0
+    #     for r, g, b in pixel_data:
+    #
+    #         # RGB->Greyscale luma calculation into 4-bits
+    #         grey = (r * 306 + g * 601 + b * 117) >> 14
+    #
+    #         if grey > 0:
+    #             if i % 2 == 0:
+    #                 buf[i // 2] = (grey << 4)
+    #             else:
+    #                 buf[i // 2] |= grey
+    #
+    #         i += 1
+    #
+    # def display(self, image):
+    #     """
+    #     Takes a 1-bit monochrome or 24-bit RGB image and renders it
+    #     to the SSD1322 OLED display. RGB pixels are converted to 4-bit
+    #     greyscale values using a simplified Luma calculation, based on
+    #     *Y'=0.299R'+0.587G'+0.114B'*.
+    #
+    #     :param image: the image to render
+    #     :type image: PIL.Image.Image
+    #     """
+    #     assert (image.mode == self.mode)
+    #     assert (image.size == self.size)
+    #
+    #     image = self.preprocess(image)
+    #
+    #     if self.framebuffer.redraw_required(image):
+    #         left, top, right, bottom = self.framebuffer.inflate_bbox()
+    #         width = right - left
+    #         height = bottom - top
+    #
+    #         pix_start = self.column_offset + left
+    #         coladdr_start = pix_start >> 2
+    #         coladdr_end = (pix_start + width >> 2) - 1
+    #
+    #         self.command(0x15, coladdr_start, coladdr_end)  # set column addr
+    #         self.command(0x75, top, bottom - 1)  # Reset row addr
+    #         # self.command(0x15, 28, 91)  # set column addr
+    #         # self.command(0x75, 0, 63)  # Reset row addr
+    #         self.command(0x5C)  # Enable MCU to write data into RAM
+    #
+    #         buf = bytearray(width * height >> 1)
+    #
+    #         self.populate(buf, self.framebuffer.getdata())
+    #         self.data(list(buf))
+    #
+    # def command(self, cmd, *args):
+    #     """
+    #     Sends a command and an (optional) sequence of arguments through to the
+    #     delegated serial interface. Note that the arguments are passed through
+    #     as data.
+    #     """
+    #     self._serial_interface.command(cmd)
+    #     if len(args) > 0:
+    #         self._serial_interface.data(list(args))
+
 
 
 
